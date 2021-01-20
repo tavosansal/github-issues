@@ -1,4 +1,4 @@
 export default interface GithubUser {
-    login: string;
-    avatar_url: string;
+  login: string;
+  avatar_url: string;
 }

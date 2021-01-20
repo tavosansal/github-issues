@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import IssuesList from './IssuesList';
 
@@ -14,10 +14,10 @@ function App() {
     repoUrl: 'https://api.github.com/repos/graphql/graphql-js/issues',
   }]
 
-  return(
+  return (
     <div className="bg-gray-200 p-8 items-center justify-center antialiased text-gray-900">
       {repos.map(repo => (
-        <IssuesList title={repo.title} repoUrl={repo.repoUrl}/>
+        <IssuesList title={repo.title} repoUrl={repo.repoUrl} />
       ))}
     </div>
   )
