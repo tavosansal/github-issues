@@ -73,7 +73,7 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
               <h3 className="text-base sm:text-xl lg:text-base xl:text-lg font-semibold truncate">
                 {item.title} (#{item.number})
               </h3>
-              <div className="text-gray-500 text-base text-sm hover:underline" onClick={(e) => openInNewTab(`https://github.com/${item.user.login}`, e)}>
+              <div className="text-gray-500 text-base text-sm hover:underline float-left" onClick={(e) => openInNewTab(`https://github.com/${item.user.login}`, e)}>
                 Opened By: {' '}
                 <span className="text-md font-bold">
                   {item.user.login}
