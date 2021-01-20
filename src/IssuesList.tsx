@@ -4,6 +4,7 @@ import GithubIssue from './interfaces/GithubIssue';
 interface IssuesListProps {
   title: string;
   repoUrl: string;
+  color: string;
 }
 
 function sortResultsByTitle(a: GithubIssue, b: GithubIssue) {
@@ -23,7 +24,7 @@ function cleanupAndSortResults(items: GithubIssue[]) {
 }
 
 
-export default function IssuesList({ title, repoUrl }: IssuesListProps) {
+export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
   const [issuesList, setIssuesList] = useState<GithubIssue[]>([]);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function IssuesList({ title, repoUrl }: IssuesListProps) {
         {title} Issues
       </h2>
       {issuesList.map(item => (
-        <div key={item.id} className="bg-white p-4 rounded-lg border hover:bg-gray-200">
+        <div key={item.id} className={`p-4 rounded-lg border hover:bg-${color}-200 mb-5`}>
           <div className="flex items-center space-x-3.5 sm:space-x-5 lg:space-x-3.5 xl:space-x-5 cursor-pointer" onClick={(e) => openInNewTab(item.html_url, e)}>
             <img src={item.user.avatar_url} alt="avatar" width="160" height="160" className="flex-none w-20 h-20 rounded-lg bg-gray-100" />
             <div className="min-w-0 flex-auto space-y-0.5">
