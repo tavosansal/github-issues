@@ -48,13 +48,25 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
     window.open(url, '_blank');
   }
 
+  // There might be a better way to do this. But postcss removes dynamic usasges of classes for color so usages need to be static.
+  let backgroundColor = '';
+  if (color === 'green') {
+    backgroundColor = 'bg-green-200';
+  }
+  if (color === 'purple') {
+    backgroundColor = 'bg-purple-200';
+  }
+  if (color === 'pink') {
+    backgroundColor = 'bg-pink-200';
+  }
+
   return (
     <div className="bg-white p-6 rounded-lg mb-10">
       <h2 className="font-bold text-xl mb-5">
         {title} Issues
       </h2>
       {issuesList.map(item => (
-        <div key={item.id} className={`p-4 rounded-lg border hover:bg-${color}-200 mb-5`}>
+        <div key={item.id} className={`p-4 rounded-lg border hover:${backgroundColor} mb-5`}>
           <div className="flex items-center space-x-3.5 sm:space-x-5 lg:space-x-3.5 xl:space-x-5 cursor-pointer" onClick={(e) => openInNewTab(item.html_url, e)}>
             <img src={item.user.avatar_url} alt="avatar" width="160" height="160" className="flex-none w-20 h-20 rounded-lg bg-gray-100" />
             <div className="min-w-0 flex-auto space-y-0.5">
