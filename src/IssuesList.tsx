@@ -62,13 +62,10 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
                 {item.title} (#{item.number})
               </h3>
               <div className="text-gray-500 text-base text-sm hover:underline" onClick={(e) => openInNewTab(`https://github.com/${item.user.login}`, e)}>
-                Opened By: 
+                Opened By: {' '}
                 <span className="text-md font-bold">
                   {item.user.login}
                 </span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
               </div>
             </div>
             <button className="rounded-lg bg-red-600 p-2 text-white hover:bg-red-500" onClick={(e) => removeItem(item, e)}>
