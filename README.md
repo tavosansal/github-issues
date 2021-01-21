@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deployed Version
+You can view a deployed version here: [Live Demo](https://master.d3dri1kvl1ysyf.amplifyapp.com/)
 ## Available Scripts
 
 In the project directory, you can run:
