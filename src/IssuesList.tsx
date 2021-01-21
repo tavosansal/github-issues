@@ -31,7 +31,6 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
   useEffect(() => {
     async function fetchData() {
       const results = await fetch(repoUrl);
-
       setIssuesList(cleanupAndSortResults(await results.json()));
       setIsLoaded(true);
     }
