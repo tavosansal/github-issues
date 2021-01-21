@@ -26,12 +26,14 @@ function cleanupAndSortResults(items: GithubIssue[]) {
 
 export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
   const [issuesList, setIssuesList] = useState<GithubIssue[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const results = await fetch(repoUrl);
 
       setIssuesList(cleanupAndSortResults(await results.json()));
+      setIsLoaded(true);
     }
     fetchData();
   }, []);
@@ -60,12 +62,23 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
     backgroundColor = 'bg-pink-200';
   }
 
-  return (
-    <div className="bg-white p-6 rounded-lg mb-10">
-      <h2 className="font-bold text-xl mb-5">
-        {title} Issues
-      </h2>
-      {issuesList.map(item => (
+  function Loading() {
+    return (
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="animate-spin h-5 w-5 mr-2 float-left">
+          <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+        </svg>
+        <span>Fetching Issues...</span>
+      </div>
+    );
+  }
+
+  let ListBody;
+  if (!isLoaded) {
+    ListBody = <Loading />;
+  } else {
+    ListBody = (
+      issuesList.map(item => (
         <div key={item.id} className={`p-4 rounded-lg border hover:${backgroundColor} mb-5`}>
           <div className="flex items-center space-x-3.5 sm:space-x-5 lg:space-x-3.5 xl:space-x-5 cursor-pointer" onClick={(e) => openInNewTab(item.html_url, e)}>
             <img src={item.user.avatar_url} alt="avatar" width="160" height="160" className="flex-none w-20 h-20 rounded-lg bg-gray-100" />
@@ -85,7 +98,16 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
             </button>
           </div>
         </div>
-      ))}
+      ))
+    );
+  }
+
+  return (
+    <div className="bg-white p-6 rounded-lg mb-10">
+      <h2 className="font-bold text-xl mb-5">
+        {title} Issues
+      </h2>
+      {ListBody}
     </div>
   )
 }
