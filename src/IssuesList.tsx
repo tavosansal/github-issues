@@ -4,6 +4,7 @@ import GithubIssue from './interfaces/GithubIssue';
 interface IssuesListProps {
   title: string;
   repoUrl: string;
+  issuesHtmlUrl: string;
   color: string;
 }
 
@@ -24,7 +25,7 @@ function cleanupAndSortResults(items: GithubIssue[]) {
 }
 
 
-export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
+export default function IssuesList({ title, repoUrl, color, issuesHtmlUrl }: IssuesListProps) {
   const [issuesList, setIssuesList] = useState<GithubIssue[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -104,7 +105,9 @@ export default function IssuesList({ title, repoUrl, color }: IssuesListProps) {
   return (
     <div className="bg-white p-6 rounded-lg mb-10">
       <h2 className="font-bold text-xl mb-5">
-        {title} Issues
+        <a href={issuesHtmlUrl} target="_blank" rel="noopener noreferrer">
+          {title} Issues
+        </a>
       </h2>
       {ListBody}
     </div>
